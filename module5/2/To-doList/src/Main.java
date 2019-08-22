@@ -33,44 +33,39 @@ public class Main {
 
         while (true) {
             int index;
-            String command = new String();
+            String command;
             String str = new String();
 
             System.out.println("Введите команду: ");
             String input = new Scanner(System.in).nextLine();
 
-            Matcher m = Pattern.compile("ADD|EDIT|DELETE|LIST").matcher(input);
+            Matcher m = Pattern.compile("(?<command>ADD|EDIT|DELETE|LIST)+(?<index>\\s+\\d+)?(?<str>\\s+.*)?").matcher(input);
             if (!m.find()) {
                 printHelp();
                 continue;
             } else {
-                command = m.group(0);
-            }
-
-            m = Pattern.compile("\\d+").matcher(input);
-            if (m.find() && (input.indexOf(m.group(0)) < command.length() + 2)) {
-                index = Integer.parseInt(m.group(0));
-            } else {
-                index = -1;
-            }
-
-            if (index >= 0) {
-                str = input.substring(input.indexOf((String.valueOf(index))) + String.valueOf(index).length()).trim();
-            } else {
-                str = input.replaceAll(command, "").trim();
+                command = m.group("command");
+                if (m.group("index") != null) {
+                    index = Integer.parseInt(m.group("index").trim());
+                } else {
+                    index = -1;
+                }
+                if (m.group("str") != null) {
+                    str = m.group("str").trim();
+                }
             }
 
             if (command.equals("LIST")) {
                 printList(list);
             } else if (command.equals("ADD") && !str.equals("")) {
-                if (index > 0) {
+                if (index >= 0) {
                     list.addElement(index, str);
                 } else {
                     list.addElement(str);
                 }
-            } else if (command.equals("EDIT") && index >= 0) {
+            } else if (command.equals("EDIT") && index >= 0 && index < list.list().size()) {
                 list.edit(index, str);
-            } else if (command.equals("DELETE") && index >= 0) {
+            } else if (command.equals("DELETE") && index >= 0 && index < list.list().size()) {
                     list.delete(index);
             } else {
                     System.out.println("Неверная команда");

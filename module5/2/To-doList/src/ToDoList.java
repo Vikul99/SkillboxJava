@@ -23,18 +23,10 @@ public class ToDoList {
     }
 
     public void edit(int index, String str) {
-        if (index > list.size()) {
-            addElement(str);
-        } else {
             list.set(index, str);
-        }
     }
 
     public void delete(int index) {
-        if (index > list.size()) {
-            list.remove(list.size() - 1);
-        } else {
             list.remove(index);
-        }
     }
 }
