@@ -1,13 +1,13 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ToDoList {
 
-    private ArrayList<String> list = new ArrayList<>();
+    private List<String> list = new ArrayList<String>();
 
-    public void list() {
-        for (int i = 0; i < list.size(); ++i) {
-            System.out.println(i + " - " + list.get(i));
-        }
+    public List<String> list() {
+        return Collections.unmodifiableList(list);
     }
 
     public void addElement(String str) {
@@ -31,6 +31,10 @@ public class ToDoList {
     }
 
     public void delete(int index) {
-        list.remove(index);
+        if (index > list.size()) {
+            list.remove(list.size() - 1);
+        } else {
+            list.remove(index);
+        }
     }
 }
