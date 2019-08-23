@@ -7,7 +7,7 @@ public class Main {
 
     public static void printEmails(HashSet<String> emails) {
         if (emails.size() != 0) {
-            for (String email : emails) {
+            for (String email: emails) {
                 System.out.println(email);
             }
         } else {
@@ -21,31 +21,36 @@ public class Main {
                 "\tДля просмотра email - адресов оспользуйтесь командой LIST");
     }
 
+    public static boolean isEmailValid(String email) {
+       Matcher emailMatcher = Pattern.compile("(?<email>^[a-zA-z0-9._%+-]+@[a-zA-z0-9._]+\\.[a-zA-Z]{2,6}$)").matcher(email);
+       if (emailMatcher.find()) {
+           return true;
+       } else {
+           return false;
+       }
+    }
+
+
     public static void main(String[] args) {
         HashSet<String> emails = new HashSet<>();
 
         while (true) {
-            String command = new String();
+            String command;
+            String email = "";
 
             System.out.println("Введите команду: ");
-            String input = new Scanner(System.in).nextLine();
-
-            Matcher m = Pattern.compile("ADD|LIST").matcher(input);
-            if (!m.find()) {
-                printHelp();
-                continue;
+            String[] input = new Scanner(System.in).nextLine().split(" ");
+            if (input.length == 2) {
+                command = input[0];
+                email = input[1];
             } else {
-                command = m.group(0);
+                command = input[0];
             }
-
-            input = input.replaceAll(command, "").trim();
-
-            m = Pattern.compile("^[a-zA-z0-9._%+-]+@[a-zA-z0-9._]+\\.[a-zA-Z]{2,6}$").matcher(input);
 
             if (command.equals("LIST")) {
                 printEmails(emails);
-            } else if (command.equals("ADD") && m.find() && !input.equals("")) {
-                emails.add(input);
+            } else if (command.equals("ADD") && isEmailValid(email)) {
+                emails.add(email);
             } else {
                 System.out.println("Неверный формат");
                 printHelp();
