@@ -1,7 +1,5 @@
 import java.util.HashSet;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
 
@@ -22,12 +20,7 @@ public class Main {
     }
 
     public static boolean isEmailValid(String email) {
-       Matcher emailMatcher = Pattern.compile("(?<email>^[a-zA-z0-9._%+-]+@[a-zA-z0-9._]+\\.[a-zA-Z]{2,6}$)").matcher(email);
-       if (emailMatcher.find()) {
-           return true;
-       } else {
-           return false;
-       }
+        return email.matches("\\w+@\\w+\\.\\w{2,6}");
     }
 
 
@@ -35,11 +28,11 @@ public class Main {
         HashSet<String> emails = new HashSet<>();
 
         while (true) {
-            String command;
-            String email = "";
-
             System.out.println("Введите команду: ");
             String[] input = new Scanner(System.in).nextLine().split(" ");
+
+            String command;
+            String email = "";
             if (input.length == 2) {
                 command = input[0];
                 email = input[1];
