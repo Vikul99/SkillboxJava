@@ -32,27 +32,25 @@ public class Main {
         ToDoList list = new ToDoList();
 
         while (true) {
-            int index;
-            String command;
-            String str = new String();
-
             System.out.println("Введите команду: ");
             String input = new Scanner(System.in).nextLine();
 
-            Matcher m = Pattern.compile("(?<command>ADD|EDIT|DELETE|LIST)+(?<index>\\s+\\d+)?(?<str>\\s+.*)?").matcher(input);
+            Matcher m = Pattern.compile("(?<command>ADD|EDIT|DELETE|LIST)(?<index>\\s+\\d+)?(?<str>\\s+.*)?").matcher(input);
             if (!m.find()) {
                 printHelp();
                 continue;
+            }
+
+            int index;
+            String str = "";
+            String command = m.group("command");
+            if (m.group("index") != null) {
+                index = Integer.parseInt(m.group("index").trim());
             } else {
-                command = m.group("command");
-                if (m.group("index") != null) {
-                    index = Integer.parseInt(m.group("index").trim());
-                } else {
-                    index = -1;
-                }
-                if (m.group("str") != null) {
-                    str = m.group("str").trim();
-                }
+                index = -1;
+            }
+            if (m.group("str") != null) {
+                str = m.group("str").trim();
             }
 
             if (command.equals("LIST")) {
