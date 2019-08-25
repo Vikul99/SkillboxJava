@@ -1,18 +1,23 @@
-import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-
 public class Main {
-    public static void printPhoneBook(Map<String, String> map) {
-        for (String key: map.keySet()) {
-            System.out.println(key + " : " + map.get(key));
+    public static final String PHONE_NUMBER_REGEX = "^([7|8])?(\\d{3})(\\d{3})(\\d{2})(\\d{2}$)";
+    public static TreeMap<String, String> phoneBook = new TreeMap<>();
+
+    public static void printPhoneBook() {
+        if (phoneBook.size() == 0) {
+            System.out.println("Телефонная книга пуста");
+        } else {
+            for (String key: phoneBook.keySet()) {
+            System.out.println(key + " : " + phoneBook.get(key));
+            }
         }
     }
 
-    public static String getKey(Map<String, String> map, String value) {
-        for (String key: map.keySet()) {
-            if (value.equals(map.get(key))) {
+    public static String getKey(String value) {
+        for (String key: phoneBook.keySet()) {
+            if (value.equals(phoneBook.get(key))) {
                 return key;
             }
         }
@@ -20,7 +25,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        TreeMap<String, String> phoneBook = new TreeMap<>();
 
         Scanner scanner = new Scanner(System.in);
         for (;;) {
@@ -30,20 +34,15 @@ public class Main {
             String input = scanner.nextLine();
 
            if (input.equals("LIST")) {
-               if (phoneBook.size() == 0) {
-                   System.out.println("Телефонная книга пуста");
-               }
-               printPhoneBook(phoneBook);
+               printPhoneBook();
                continue;
            }
 
-           String phoneNumberRegex = "^([7|8])?(\\d{3})(\\d{3})(\\d{2})(\\d{2}$)";
-           String phoneNumber = "";
            if (input.matches("(.*[0-9]+.*)")) {
                input = input.replaceAll("\\D", "");
-               phoneNumber = input.replaceFirst(phoneNumberRegex,"+7 $2 $3 $4-$5");
+               String phoneNumber = input.replaceFirst(PHONE_NUMBER_REGEX,"+7 $2 $3 $4-$5");
                if (phoneBook.containsValue(phoneNumber)) {
-                   System.out.println(getKey(phoneBook, phoneNumber) + " : " + phoneNumber);
+                   System.out.println(getKey(phoneNumber) + " : " + phoneNumber);
                } else {
                    System.out.println("Введите имя абонента: ");
                    String phoneName = scanner.nextLine();
@@ -53,9 +52,9 @@ public class Main {
                System.out.println(input + " : " + phoneBook.get(input));
            } else {
                System.out.println("Введите номер абонента: ");
-               phoneNumber = scanner.nextLine().replaceAll("\\D", "");
-               if (phoneNumber.matches(phoneNumberRegex)) {
-                   phoneNumber = phoneNumber.replaceFirst(phoneNumberRegex,"+7 $2 $3 $4-$5");
+               String phoneNumber = scanner.nextLine().replaceAll("\\D", "");
+               if (phoneNumber.matches(PHONE_NUMBER_REGEX)) {
+                   phoneNumber = phoneNumber.replaceFirst(PHONE_NUMBER_REGEX,"+7 $2 $3 $4-$5");
                } else {
                    System.out.println("Неверный формат номера абонента");
                    continue;
