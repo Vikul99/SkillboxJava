@@ -7,11 +7,15 @@ public class Main {
         ArrayList<String> carNumbers = new ArrayList<>();
         String[] carNumberChar = new String[] {"A", "B", "E", "K", "M", "H", "O", "P", "C", "T", "Y", "X"};
         for (int c = 0; c < carNumberChar.length; ++c) {
-            for (int region = 1; region <= 197; ++region) {
-                for (int num = 1; num < 10; ++num) {
-                    String character = carNumberChar[c];
-                    String carNumber = String.format("%s%d%d%d%s%s%d", character, num, num, num, character, character, region);
-                    carNumbers.add(carNumber);
+            for (int region = 1; region <= 199; ++region) {
+                for (int firstNum = 1; firstNum < 10; ++firstNum) {
+                    for (int secondNum = 0; secondNum < 10; ++secondNum ) {
+                        for (int thirdNum = 0; thirdNum < 10; ++thirdNum) {
+                            String character = carNumberChar[c];
+                            String carNumber = String.format("%s%d%d%d%s%s%d", character, firstNum, secondNum, thirdNum, character, character, region);
+                            carNumbers.add(carNumber);
+                        }
+                    }
                 }
             }
         }
