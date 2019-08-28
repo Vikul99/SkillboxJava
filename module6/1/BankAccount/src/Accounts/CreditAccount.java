@@ -1,3 +1,5 @@
+package Accounts;
+
 public class CreditAccount extends CheckAccount {
     private static final double COMMISSION = 0.01;
 

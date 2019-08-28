@@ -1,3 +1,5 @@
+package Accounts;
+
 public class CheckAccount {
     protected double moneyAmount;
 

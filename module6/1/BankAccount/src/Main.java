@@ -1,3 +1,7 @@
+import Accounts.CheckAccount;
+import Accounts.CreditAccount;
+import Accounts.DepositAccount;
+
 import java.time.LocalDate;
 
 public class Main {
