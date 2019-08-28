@@ -3,7 +3,7 @@ package Accounts;
 import java.time.LocalDate;
 
 public class DepositAccount extends  CheckAccount {
-    private static final int DEPOSIT_PERIOD = 1;
+    private static final int DEPOSIT_MONTH_PERIOD = 1;
     private LocalDate addDate;
 
     public DepositAccount(double moneyAmount) {
@@ -26,7 +26,7 @@ public class DepositAccount extends  CheckAccount {
         if (addDate == null) {
             moneyAmount -= money;
             return moneyAmount;
-        } else if (Math.abs(date.getMonthValue() - addDate.getMonthValue()) >= DEPOSIT_PERIOD) {
+        } else if (date.isAfter(addDate.plusMonths(DEPOSIT_MONTH_PERIOD))) {
             moneyAmount -= money;
             return moneyAmount;
         } else {

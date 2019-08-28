@@ -20,7 +20,7 @@ public class Main {
         System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
         depositAccount.addMoney(5000.0);
         System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
-        date = date.plusMonths(1);
+        date = date.plusWeeks(5);
         depositAccount.getMoney(3000.0, date);
         System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
 
@@ -32,5 +32,10 @@ public class Main {
         creditAccount.transfer(depositAccount, 100000.0);
         System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
         System.out.println("Баланс кредитного счета: " + creditAccount.getMoneyAmount());
+
+        var emptyAccount = new CheckAccount(0);
+        var myAccount = new CheckAccount(0);
+        emptyAccount.transfer(myAccount, 5000.0);
+        System.out.println(myAccount.getMoneyAmount());
     }
 }

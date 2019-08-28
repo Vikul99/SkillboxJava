@@ -29,7 +29,9 @@ public class CheckAccount {
     }
 
     public void transfer(CheckAccount check, Double moneyToTransfer) {
-        getMoney(moneyToTransfer);
-        check.addMoney(moneyToTransfer);
+        if (moneyToTransfer <= moneyAmount) {
+            getMoney(moneyToTransfer);
+            check.addMoney(moneyToTransfer);
+        }
     }
 }
