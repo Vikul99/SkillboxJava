@@ -8,10 +8,11 @@ public class DepositAccount extends  CheckAccount {
 
     public DepositAccount(double moneyAmount) {
         super(moneyAmount);
+        addDate = LocalDate.now();
     }
 
     public DepositAccount() {
-        super();
+        this(0);
     }
 
     public void addMoney(double money) {
@@ -20,17 +21,21 @@ public class DepositAccount extends  CheckAccount {
     }
 
     public double getMoney(double money, LocalDate date) {
-        if (money > moneyAmount) {
-            return 0;
-        }
-        if (addDate == null) {
-            moneyAmount -= money;
-            return moneyAmount;
-        } else if (date.isAfter(addDate.plusMonths(DEPOSIT_MONTH_PERIOD))) {
+        if (checkDate(date) && money <= moneyAmount) {
             moneyAmount -= money;
             return moneyAmount;
         } else {
-            return moneyAmount;
+            return 0;
+        }
+    }
+
+    public boolean checkDate (LocalDate date) {
+        return date.isAfter(addDate.plusMonths(DEPOSIT_MONTH_PERIOD));
+    }
+
+    public void transfer(CheckAccount check, Double moneyToTransfer, LocalDate date) {
+        if (moneyToTransfer <= moneyAmount) {
+            check.addMoney(getMoney(moneyToTransfer, date));
         }
     }
 }

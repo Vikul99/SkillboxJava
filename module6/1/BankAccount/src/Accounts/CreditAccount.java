@@ -12,11 +12,11 @@ public class CreditAccount extends CheckAccount {
     }
 
     public double getMoney(double money) {
-        if (money > moneyAmount) {
-            return 0;
-        } else {
-            moneyAmount = moneyAmount - money - COMMISSION * money;
+        if (money <= moneyAmount) {
+            moneyAmount -= money * (1 - COMMISSION);
             return moneyAmount;
+        } else {
+            return 0;
         }
     }
 }

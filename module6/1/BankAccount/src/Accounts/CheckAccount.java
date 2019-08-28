@@ -1,5 +1,7 @@
 package Accounts;
 
+import java.time.LocalDate;
+
 public class CheckAccount {
     protected double moneyAmount;
 
@@ -8,7 +10,7 @@ public class CheckAccount {
     }
 
     public CheckAccount() {
-        this.moneyAmount = 0.0;
+        this(0.0);
     }
 
     public double getMoneyAmount() {
@@ -20,18 +22,21 @@ public class CheckAccount {
     }
 
     public double getMoney(double money) {
-        if (money > moneyAmount) {
-            return 0;
-        } else {
+        if (money <= moneyAmount) {
             moneyAmount -= money;
-            return moneyAmount;
+            return  moneyAmount;
+        } else {
+            return 0;
         }
+    }
+
+    public double getMoney(double money, LocalDate date) {
+        return 0;
     }
 
     public void transfer(CheckAccount check, Double moneyToTransfer) {
         if (moneyToTransfer <= moneyAmount) {
-            getMoney(moneyToTransfer);
-            check.addMoney(moneyToTransfer);
+            check.addMoney(getMoney(moneyToTransfer));
         }
     }
 }
