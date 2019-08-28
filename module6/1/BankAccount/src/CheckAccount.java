@@ -17,12 +17,17 @@ public class CheckAccount {
         this.moneyAmount += money;
     }
 
-    public double getMoney (double money) {
+    public double getMoney(double money) {
         if (money > moneyAmount) {
             return 0;
         } else {
             moneyAmount -= money;
             return moneyAmount;
         }
+    }
+
+    public void transfer(CheckAccount check, Double moneyToTransfer) {
+        getMoney(moneyToTransfer);
+        check.addMoney(moneyToTransfer);
     }
 }

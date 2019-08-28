@@ -1,8 +1,8 @@
 import java.time.LocalDate;
 
 public class DepositAccount extends  CheckAccount {
+    private static final int DEPOSIT_PERIOD = 1;
     private LocalDate addDate;
-    private boolean wasMoneyAdded = false;
 
     public DepositAccount(double moneyAmount) {
         super(moneyAmount);
@@ -15,22 +15,20 @@ public class DepositAccount extends  CheckAccount {
     public void addMoney(double money) {
         moneyAmount += money;
         addDate = LocalDate.now();
-        wasMoneyAdded = true;
     }
 
     public double getMoney(double money, LocalDate date) {
         if (money > moneyAmount) {
             return 0;
         }
-        if (!wasMoneyAdded) {
+        if (addDate == null) {
             moneyAmount -= money;
             return moneyAmount;
-        } else if (date.getMonthValue() - addDate.getMonthValue() >= 1) {
+        } else if (Math.abs(date.getMonthValue() - addDate.getMonthValue()) >= DEPOSIT_PERIOD) {
             moneyAmount -= money;
             return moneyAmount;
         } else {
             return moneyAmount;
         }
     }
-
 }

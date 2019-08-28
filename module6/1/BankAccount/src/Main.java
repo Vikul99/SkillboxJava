@@ -21,8 +21,12 @@ public class Main {
         System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
 
         CreditAccount creditAccount = new CreditAccount(1000000.0);
-        System.out.println("Баланс крелитного счета: " + creditAccount.getMoneyAmount());
+        System.out.println("Баланс кредитного счета: " + creditAccount.getMoneyAmount());
         creditAccount.getMoney(500000);
+        System.out.println("Баланс кредитного счета: " + creditAccount.getMoneyAmount());
+
+        creditAccount.transfer(depositAccount, 100000.0);
+        System.out.println("Баланс депозитного счета: " + depositAccount.getMoneyAmount());
         System.out.println("Баланс кредитного счета: " + creditAccount.getMoneyAmount());
     }
 }
