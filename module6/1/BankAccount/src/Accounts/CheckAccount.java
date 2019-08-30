@@ -1,42 +1,36 @@
 package Accounts;
 
-import java.time.LocalDate;
-
 public class CheckAccount {
-    protected double moneyAmount;
+    protected double balance;
 
-    public CheckAccount(double moneyAmount) {
-        this.moneyAmount = moneyAmount;
+    public CheckAccount(double money) {
+        balance = money;
     }
 
     public CheckAccount() {
         this(0.0);
     }
 
-    public double getMoneyAmount() {
-        return moneyAmount;
+    public double getBalance() {
+        return balance;
     }
 
     public void addMoney(double money) {
-        this.moneyAmount += money;
+        balance += money;
     }
 
     public double getMoney(double money) {
-        if (money <= moneyAmount) {
-            moneyAmount -= money;
-            return  moneyAmount;
+        if (money <= balance) {
+            balance -= money;
+            return  balance;
         } else {
             return 0;
         }
     }
 
-    public double getMoney(double money, LocalDate date) {
-        return 0;
-    }
-
     public void transfer(CheckAccount check, Double moneyToTransfer) {
-        if (moneyToTransfer <= moneyAmount) {
-            check.addMoney(getMoney(moneyToTransfer));
+        if (!(getMoney(moneyToTransfer) == 0)) {
+            check.addMoney(moneyToTransfer);
         }
     }
 }

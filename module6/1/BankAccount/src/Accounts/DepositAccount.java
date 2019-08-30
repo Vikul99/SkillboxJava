@@ -4,11 +4,10 @@ import java.time.LocalDate;
 
 public class DepositAccount extends  CheckAccount {
     private static final int DEPOSIT_MONTH_PERIOD = 1;
-    private LocalDate addDate;
 
     public DepositAccount(double moneyAmount) {
         super(moneyAmount);
-        addDate = LocalDate.now();
+        MyTime.getInstance().setNow(LocalDate.now());
     }
 
     public DepositAccount() {
@@ -16,26 +15,16 @@ public class DepositAccount extends  CheckAccount {
     }
 
     public void addMoney(double money) {
-        moneyAmount += money;
-        addDate = LocalDate.now();
+        balance += money;
+        MyTime.getInstance().setNow(LocalDate.now());
     }
 
-    public double getMoney(double money, LocalDate date) {
-        if (checkDate(date) && money <= moneyAmount) {
-            moneyAmount -= money;
-            return moneyAmount;
+    public double getMoney(double money) {
+        if (MyTime.getInstance().now().isAfter(LocalDate.now().plusMonths(DEPOSIT_MONTH_PERIOD)) && money <= balance) {
+            balance -= money;
+            return balance;
         } else {
             return 0;
-        }
-    }
-
-    public boolean checkDate (LocalDate date) {
-        return date.isAfter(addDate.plusMonths(DEPOSIT_MONTH_PERIOD));
-    }
-
-    public void transfer(CheckAccount check, Double moneyToTransfer, LocalDate date) {
-        if (moneyToTransfer <= moneyAmount) {
-            check.addMoney(getMoney(moneyToTransfer, date));
         }
     }
 }
