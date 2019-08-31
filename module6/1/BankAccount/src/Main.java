@@ -31,10 +31,10 @@ public class Main {
         System.out.println("Баланс депозитного счета: " + depositAccount.getBalance());
         System.out.println("Баланс кредитного счета: " + creditAccount.getBalance());
 
-        var deposit = new DepositAccount(2000.0);
-        var myAccount = new CheckAccount(0);
+        var deposit = new DepositAccount(100);
+        var myAccount = new CheckAccount(100);
         MyTime.getInstance().setNow(LocalDate.now().plusDays(32));
-        depositAccount.transfer(myAccount, 1000.0);
+        deposit.transfer(myAccount, 100.0);
         System.out.println(myAccount.getBalance());
     }
 }

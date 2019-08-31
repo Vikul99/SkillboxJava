@@ -24,12 +24,12 @@ public class CheckAccount {
             balance -= money;
             return  balance;
         } else {
-            return 0;
+            return -1;
         }
     }
 
     public void transfer(CheckAccount check, Double moneyToTransfer) {
-        if (!(getMoney(moneyToTransfer) == 0)) {
+        if (getMoney(moneyToTransfer) != -1) {
             check.addMoney(moneyToTransfer);
         }
     }

@@ -24,7 +24,7 @@ public class DepositAccount extends  CheckAccount {
             balance -= money;
             return balance;
         } else {
-            return 0;
+            return -1;
         }
     }
 }

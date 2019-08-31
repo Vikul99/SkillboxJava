@@ -16,7 +16,7 @@ public class CreditAccount extends CheckAccount {
             balance -= money * (1 + COMMISSION);
             return balance;
         } else {
-            return 0;
+            return -1;
         }
     }
 }
