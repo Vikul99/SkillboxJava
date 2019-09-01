@@ -1,6 +1,6 @@
 package Company;
 
-public class Clerk extends Company implements Employee {
+public class Clerk implements Employee {
 
     private double salary;
 

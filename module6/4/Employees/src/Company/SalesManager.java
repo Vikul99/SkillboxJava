@@ -1,6 +1,6 @@
 package Company;
 
-public class SalesManager extends Company implements Employee {
+public class SalesManager implements Employee {
 
     private static final double PERCENT_OF_SALE = 0.05;
 
@@ -13,7 +13,7 @@ public class SalesManager extends Company implements Employee {
 
     public void saleProduct() {
         double productPrice = 100000.0 + Math.random() * 900000.0;
-        companyIncome += productPrice;
+        Company.companyIncome += productPrice;
         salary += productPrice * PERCENT_OF_SALE;
     }
 

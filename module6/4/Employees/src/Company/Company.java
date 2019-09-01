@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Company {
-    protected double companyIncome;
+    public static double companyIncome;
     private ArrayList<Employee> employees = new ArrayList<>();
 
     public void hireEmployee(Employee employee) {
@@ -21,7 +21,7 @@ public class Company {
         return employees;
     }
 
-    public double getCompanyIncome() {
+    public static double getCompanyIncome() {
         return companyIncome;
     }
 
