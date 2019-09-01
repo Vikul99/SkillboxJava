@@ -12,7 +12,7 @@ public class CreditAccount extends CheckAccount {
     }
 
     public double getMoney(double money) {
-        if (money <= balance) {
+        if (money * (1 + COMMISSION) <= balance) {
             balance -= money * (1 + COMMISSION);
             return balance;
         } else {
