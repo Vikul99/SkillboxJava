@@ -11,8 +11,8 @@ public class Main {
             company.hireEmployee(new Clerk());
         }
 
-        for (Employee employee : company.getTopSalaryStaff(5)) {
-            System.out.println(employee.getMonthSalary());
+        for (Employee employee : company.getTopSalaryStaff(5, company)) {
+            System.out.println(employee.getMonthSalary(company));
         }
         System.out.println();
 
@@ -21,8 +21,8 @@ public class Main {
             company.fireEmployee(company.getEmployees().get((int)(Math.random() * company.getEmployees().size())));
         }
 
-        for (Employee employee : company.getTopSalaryStaff(5)) {
-            System.out.println(employee.getMonthSalary());
+        for (Employee employee : company.getTopSalaryStaff(5, company)) {
+            System.out.println(employee.getMonthSalary(company));
         }
         System.out.println();
     }

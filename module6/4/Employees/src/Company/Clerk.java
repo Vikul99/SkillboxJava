@@ -2,14 +2,14 @@ package Company;
 
 public class Clerk implements Employee {
 
-    private double salary;
+    protected double salary;
 
     public Clerk() {
         salary = 50000.0 + Math.random() * 100000.0 ;
     }
 
     @Override
-    public double getMonthSalary() {
+    public double getMonthSalary(Company company) {
         return salary;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Company {
-    public static double companyIncome;
+    protected double companyIncome;
     private ArrayList<Employee> employees = new ArrayList<>();
 
     public void hireEmployee(Employee employee) {
@@ -21,17 +21,17 @@ public class Company {
         return employees;
     }
 
-    public static double getCompanyIncome() {
+    public double getCompanyIncome() {
         return companyIncome;
     }
 
-    public List<Employee> getTopSalaryStaff(int count) {
-        Collections.sort(employees, new MaxSalaryComparator());
+    public List<Employee> getTopSalaryStaff(int count, Company company) {
+        Collections.sort(employees, new MaxSalaryComparator(company));
         return employees.stream().limit(count).collect(Collectors.toList());
     }
 
-    public List<Employee> getLowestSalaryStaff(int count) {
-        Collections.sort(employees, new MinSalaryComparator());
+    public List<Employee> getLowestSalaryStaff(int count, Company company) {
+        Collections.sort(employees, new MinSalaryComparator(company));
         return employees.stream().limit(count).collect(Collectors.toList());
     }
 }

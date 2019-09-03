@@ -11,14 +11,14 @@ public class SalesManager implements Employee {
     }
 
 
-    public void saleProduct() {
+    public void saleProduct(Company company) {
         double productPrice = 100000.0 + Math.random() * 900000.0;
-        Company.companyIncome += productPrice;
+        company.companyIncome += productPrice;
         salary += productPrice * PERCENT_OF_SALE;
     }
 
     @Override
-    public double getMonthSalary() {
+    public double getMonthSalary(Company company) {
         return salary;
     }
 }
