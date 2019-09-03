@@ -18,7 +18,9 @@ public class Main
             int result = o1.getSalary().compareTo(o2.getSalary());
             if (result != 0) {
                 return result;
-            } else return o1.getName().compareTo(o2.getName());
+            } else {
+                return o1.getName().compareTo(o2.getName());
+            }
         }));
 
         for (Employee employee: staff) {
