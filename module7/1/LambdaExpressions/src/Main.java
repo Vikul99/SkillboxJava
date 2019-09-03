@@ -14,8 +14,12 @@ public class Main
     {
         ArrayList<Employee> staff = loadStaffFromFile();
 
-        staff.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
-        staff.sort((o1, o2) -> o1.getSalary().compareTo(o2.getSalary()));
+        staff.sort(((o1, o2) -> {
+            int result = o1.getSalary().compareTo(o2.getSalary());
+            if (result != 0) {
+                return result;
+            } else return o1.getName().compareTo(o2.getName());
+        }));
 
         for (Employee employee: staff) {
             System.out.println(employee);
