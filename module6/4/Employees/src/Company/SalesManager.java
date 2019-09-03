@@ -3,6 +3,7 @@ package Company;
 public class SalesManager implements Employee {
 
     private static final double PERCENT_OF_SALE = 0.05;
+    private double salesAmount;
 
     private double salary;
 
@@ -13,8 +14,12 @@ public class SalesManager implements Employee {
 
     public void saleProduct(Company company) {
         double productPrice = 100000.0 + Math.random() * 900000.0;
-        company.companyIncome += productPrice;
+        salesAmount += productPrice;
         salary += productPrice * PERCENT_OF_SALE;
+    }
+
+    public double getSalesAmount() {
+        return salesAmount;
     }
 
     @Override
