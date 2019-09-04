@@ -11,6 +11,15 @@ public class Main {
             company.hireEmployee(new Clerk());
         }
 
+        for (Employee employee: company.getEmployees()) {
+            if (employee instanceof SalesManager) {
+                ((SalesManager) employee).saleProduct(company);
+            }
+        }
+
+        System.out.println("Company income: " + Math.round(company.getCompanyIncome()));
+        System.out.println();
+
         for (Employee employee : company.getTopSalaryStaff(5, company)) {
             System.out.println(employee.getMonthSalary(company));
         }
@@ -24,6 +33,5 @@ public class Main {
         for (Employee employee : company.getTopSalaryStaff(5, company)) {
             System.out.println(employee.getMonthSalary(company));
         }
-        System.out.println();
     }
 }
