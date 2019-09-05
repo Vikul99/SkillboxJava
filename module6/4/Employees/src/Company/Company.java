@@ -27,16 +27,21 @@ public class Company {
                 income += ((SalesManager) employee).getSalesAmount();
             }
         }
+        for (Employee employee: employees) {
+            if (employee instanceof TopManager) {
+                ((TopManager) employee).generatePrize(income);
+            }
+        }
         return income;
     }
 
-    public List<Employee> getTopSalaryStaff(int count, Company company) {
-        Collections.sort(employees, new MaxSalaryComparator(company));
+    public List<Employee> getTopSalaryStaff(int count) {
+        Collections.sort(employees, new MaxSalaryComparator());
         return employees.stream().limit(count).collect(Collectors.toList());
     }
 
-    public List<Employee> getLowestSalaryStaff(int count, Company company) {
-        Collections.sort(employees, new MinSalaryComparator(company));
+    public List<Employee> getLowestSalaryStaff(int count) {
+        Collections.sort(employees, new MinSalaryComparator());
         return employees.stream().limit(count).collect(Collectors.toList());
     }
 }

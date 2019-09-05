@@ -1,5 +1,5 @@
 package Company;
 
 public interface Employee {
-    double getMonthSalary(Company company);
+    double getMonthSalary();
 }

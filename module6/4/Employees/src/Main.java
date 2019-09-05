@@ -20,8 +20,8 @@ public class Main {
         System.out.println("Company income: " + Math.round(company.getCompanyIncome()));
         System.out.println();
 
-        for (Employee employee : company.getTopSalaryStaff(5, company)) {
-            System.out.println(employee.getMonthSalary(company));
+        for (Employee employee : company.getTopSalaryStaff(5)) {
+            System.out.println(employee.getMonthSalary());
         }
         System.out.println();
 
@@ -30,8 +30,28 @@ public class Main {
             company.fireEmployee(company.getEmployees().get((int)(Math.random() * company.getEmployees().size())));
         }
 
-        for (Employee employee : company.getTopSalaryStaff(5, company)) {
-            System.out.println(employee.getMonthSalary(company));
+        for (Employee employee : company.getTopSalaryStaff(5)) {
+            System.out.println(employee.getMonthSalary());
         }
-    }
+        System.out.println();
+
+        SalesManager vasya = new SalesManager();
+        TopManager boss = new TopManager();
+        // Жили были босс и вася
+        company.hireEmployee(boss);
+        company.hireEmployee(vasya);
+
+        // Вначале вася ничего не делал
+        System.out.println("Company income before Vasya work: " + Math.round(company.getCompanyIncome()));
+        System.out.println("Boss income: " + Math.round(boss.getMonthSalary()));
+
+        // Но жизнь взяла своё - пришлось Васе батрачить :)
+        for (int i = 0; i < 100; i++) {
+            vasya.saleProduct(company);
+        }
+
+        // Но где бонус босса?
+        System.out.println("Company income after Vasya: " + Math.round(company.getCompanyIncome()));
+        System.out.println("Boss income: " + Math.round(boss.getMonthSalary()));
+   }
 }
