@@ -14,7 +14,6 @@ public class SalesManager implements Employee {
     public void saleProduct(Company company) {
         double productPrice = 100000.0 + Math.random() * 900000.0;
         salesAmount += productPrice;
-        salary += productPrice * PERCENT_OF_SALE;
     }
 
     protected double getSalesAmount() {
@@ -24,5 +23,10 @@ public class SalesManager implements Employee {
     @Override
     public double getMonthSalary() {
         return salary;
+    }
+
+    @Override
+    public void calculateSalary(double companyIncome) {
+        salary = salesAmount * PERCENT_OF_SALE;
     }
 }

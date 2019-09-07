@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Company {
+
     private ArrayList<Employee> employees = new ArrayList<>();
 
     public void hireEmployee(Employee employee) {
@@ -27,12 +28,11 @@ public class Company {
                 income += ((SalesManager) employee).getSalesAmount();
             }
         }
-        for (Employee employee: employees) {
-            if (employee instanceof TopManager) {
-                ((TopManager) employee).generatePrize(income);
-            }
-        }
         return income;
+    }
+
+    public void calculateSalaries() {
+        employees.stream().forEach(e -> e.calculateSalary(getCompanyIncome()));
     }
 
     public List<Employee> getTopSalaryStaff(int count) {

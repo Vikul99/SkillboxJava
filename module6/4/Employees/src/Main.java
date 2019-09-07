@@ -11,18 +11,15 @@ public class Main {
             company.hireEmployee(new Clerk());
         }
 
-        for (Employee employee: company.getEmployees()) {
-            if (employee instanceof SalesManager) {
-                ((SalesManager) employee).saleProduct(company);
-            }
-        }
+        company.getEmployees().stream()
+                .filter(e -> e instanceof SalesManager)
+                .forEach(e -> ((SalesManager) e).saleProduct(company));
 
         System.out.println("Company income: " + Math.round(company.getCompanyIncome()));
+        company.calculateSalaries();
         System.out.println();
 
-        for (Employee employee : company.getTopSalaryStaff(5)) {
-            System.out.println(employee.getMonthSalary());
-        }
+        company.getTopSalaryStaff(5).stream().forEach(e -> System.out.println(e.getMonthSalary()));
         System.out.println();
 
         int employeesToHire = (int) Math.round(company.getEmployees().size() * HIRE_PERCENT);
@@ -30,16 +27,16 @@ public class Main {
             company.fireEmployee(company.getEmployees().get((int)(Math.random() * company.getEmployees().size())));
         }
 
-        for (Employee employee : company.getTopSalaryStaff(5)) {
-            System.out.println(employee.getMonthSalary());
-        }
+        company.getTopSalaryStaff(5).stream().forEach(e -> System.out.println(e.getMonthSalary()));
         System.out.println();
+
 
         SalesManager vasya = new SalesManager();
         TopManager boss = new TopManager();
         // Жили были босс и вася
         company.hireEmployee(boss);
         company.hireEmployee(vasya);
+        company.calculateSalaries();
 
         // Вначале вася ничего не делал
         System.out.println("Company income before Vasya work: " + Math.round(company.getCompanyIncome()));
@@ -49,6 +46,7 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             vasya.saleProduct(company);
         }
+        company.calculateSalaries();
 
         // Но где бонус босса?
         System.out.println("Company income after Vasya: " + Math.round(company.getCompanyIncome()));
