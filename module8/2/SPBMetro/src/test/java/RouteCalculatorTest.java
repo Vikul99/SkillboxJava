@@ -2,7 +2,6 @@ import core.Line;
 import core.Station;
 import junit.framework.TestCase;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,9 +89,12 @@ public class RouteCalculatorTest extends TestCase {
 
         connectionStations.add(c);
         connectionStations.add(d);
-        connectionStations.add(f);
         stationIndex.addConnection(connectionStations);
         connectionStations.clear();
+
+        connectionStations.add(c);
+        connectionStations.add(f);
+        stationIndex.addConnection(connectionStations);
 
         calculator = new RouteCalculator(stationIndex);
     }
@@ -117,12 +119,11 @@ public class RouteCalculatorTest extends TestCase {
     }
 
     public void testRouteWithTwoConnections() {
-        List<Station> route = calculator.getShortestRoute(a, f);
-
-        route.forEach(s -> System.out.println(s.getName()));
-
+        List<Station> route = calculator.getShortestRoute(e, g);
+        List<String> expected = Arrays.asList("E", "D", "C", "F", "G");
+        assertEquals(expected, route.stream().map(s -> s.getName()).collect(Collectors.toList()));
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
 
