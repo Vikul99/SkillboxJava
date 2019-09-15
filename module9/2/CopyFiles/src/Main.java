@@ -6,12 +6,14 @@ public class Main {
     private static void copyFolder(File source, File target) throws IOException {
         if (source.isDirectory()) {
             File folder = new File(target, source.getName());
-            folder.mkdir();
-            for (File file: source.listFiles()) {
-                if (file.isFile()) {
-                    Files.copy(file.toPath(), new File(folder, file.getName()).toPath());
-                } else {
-                   copyFolder(file, folder);
+            File[] sourceFiles = source.listFiles();
+            if (folder.mkdir() && sourceFiles != null) {
+                for (File file: sourceFiles) {
+                    if (file.isFile()) {
+                        Files.copy(file.toPath(), new File(folder, file.getName()).toPath());
+                    } else {
+                        copyFolder(file, folder);
+                    }
                 }
             }
         }
