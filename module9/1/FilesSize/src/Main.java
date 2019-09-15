@@ -3,8 +3,9 @@ import java.io.File;
 public class Main {
     private static long folderSize(File folder) {
         long folderSize = 0;
-        if (folder.isDirectory()) {
-            for (File file: folder.listFiles()) {
+        File[] folderFiles = folder.listFiles();
+        if (folder.isDirectory() && folderFiles != null) {
+            for (File file: folderFiles) {
                 if (file.isFile()) {
                     folderSize += file.length();
                 } else {
