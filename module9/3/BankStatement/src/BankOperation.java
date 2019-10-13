@@ -1,36 +1,36 @@
 import java.time.LocalDate;
 
 public class BankOperation {
-    String accountType;
-    String accountNumber;
-    String value;
-    LocalDate operationDate;
-    String reference;
-    String operationDetails;
-    double income;
-    double consumption;
+    private String accountType;
+    private String accountNumber;
+    private String value;
+    private LocalDate operationDate;
+    private String reference;
+    private String description;
+    private double income;
+    private double withdraw;
 
-    public BankOperation(String accountType, String accountNumber, String value, LocalDate operationDate, String reference, String operationDetails, double income, double consumption) {
+    public BankOperation(String accountType, String accountNumber, String value, LocalDate operationDate, String reference, String description, double income, double withdraw) {
         this.accountType = accountType;
         this.accountNumber = accountNumber;
         this.value = value;
         this.operationDate = operationDate;
         this.reference = reference;
-        this.operationDetails = operationDetails;
+        this.description = description;
         this.income = income;
-        this.consumption = consumption;
+        this.withdraw = withdraw;
     }
 
     public double getIncome() {
         return income;
     }
 
-    public double getConsumption() {
-        return consumption;
+    public double getWithdraw() {
+        return withdraw;
     }
 
-    public String getOperationDetails() {
-        return operationDetails;
+    public String getDescription() {
+        return description;
     }
 
     public String getAccountType() {
