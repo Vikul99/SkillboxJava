@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("\nСписок абсолютных путей \n" );
         try {
-            Document doc = Jsoup.connect("https://lenta.ru/").get();
+            Document doc = Jsoup.connect("https://lenta.ru/").maxBodySize(0).get();
             Elements img = doc.getElementsByTag("img");
             ArrayList<String> urls = new ArrayList<>();
             img.forEach(element -> urls.add(element.absUrl("src")));
@@ -27,8 +27,7 @@ public class Main {
     }
 
     public static void downloadImage(String url) {
-        try {
-            InputStream in = new URL(url).openStream();
+        try (InputStream in = new URL(url).openStream()) {
             String fileName = url.substring(url.lastIndexOf('/') + 1);
             Files.copy(in, Paths.get(PATH_TO_SAVE + fileName));
         } catch (IOException e) {
